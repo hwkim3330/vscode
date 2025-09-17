@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>KETI Code - AI Code Editor</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            background: #1e1e1e;
+            color: #d4d4d4;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #header {
+            background: #2d2d30;
+            padding: 8px 16px;
+            border-bottom: 1px solid #3e3e42;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        #logo {
+            font-weight: bold;
+            color: #007acc;
+        }
+
+        #main {
+            flex: 1;
+            display: flex;
+            overflow: hidden;
+        }
+
+        #sidebar {
+            width: 240px;
+            background: #252526;
+            border-right: 1px solid #3e3e42;
+            overflow-y: auto;
+        }
+
+        #editor-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #tabs {
+            background: #2d2d30;
+            display: flex;
+            border-bottom: 1px solid #3e3e42;
+        }
+
+        .tab {
+            padding: 8px 16px;
+            background: #2d2d30;
+            border-right: 1px solid #3e3e42;
+            cursor: pointer;
+        }
+
+        .tab.active {
+            background: #1e1e1e;
+        }
+
+        #editor {
+            flex: 1;
+            padding: 16px;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 14px;
+            line-height: 1.5;
+            overflow: auto;
+            white-space: pre;
+        }
+
+        #terminal {
+            height: 200px;
+            background: #000;
+            color: #0f0;
+            padding: 8px;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 12px;
+            overflow-y: auto;
+            border-top: 1px solid #3e3e42;
+        }
+
+        #terminal-input {
+            width: 100%;
+            background: transparent;
+            border: none;
+            color: #0f0;
+            font-family: inherit;
+            outline: none;
+        }
+
+        #ai-panel {
+            width: 300px;
+            background: #252526;
+            border-left: 1px solid #3e3e42;
+            padding: 16px;
+            display: none;
+        }
+
+        #ai-input {
+            width: 100%;
+            padding: 8px;
+            background: #3c3c3c;
+            border: 1px solid #3e3e42;
+            color: #d4d4d4;
+            margin-top: 8px;
+        }
+
+        .file-item {
+            padding: 4px 16px;
+            cursor: pointer;
+        }
+
+        .file-item:hover {
+            background: #2a2d2e;
+        }
+
+        .toolbar-btn {
+            padding: 4px 8px;
+            margin: 0 4px;
+            background: transparent;
+            color: #d4d4d4;
+            border: none;
+            cursor: pointer;
+        }
+
+        .toolbar-btn:hover {
+            background: #3e3e42;
+        }
+    </style>
+</head>
+<body>
+    <div id="header">
+        <div id="logo">⚡ KETI Code</div>
+        <div>
+            <button class="toolbar-btn" onclick="newFile()">📄 New</button>
+            <button class="toolbar-btn" onclick="openFile()">📁 Open</button>
+            <button class="toolbar-btn" onclick="saveFile()">💾 Save</button>
+            <button class="toolbar-btn" onclick="toggleTerminal()">🖥️ Terminal</button>
+            <button class="toolbar-btn" onclick="toggleAI()">🤖 AI</button>
+        </div>
+    </div>
+
+    <div id="main">
+        <div id="sidebar">
+            <div style="padding: 8px; font-size: 12px; color: #969696;">EXPLORER</div>
+            <div id="file-tree"></div>
+        </div>
+
+        <div id="editor-area">
+            <div id="tabs">
+                <div class="tab active">untitled.txt</div>
+            </div>
+            <textarea id="editor" placeholder="Start coding..."></textarea>
+            <div id="terminal" style="display: none;">
+                <div id="terminal-output"></div>
+                <input id="terminal-input" type="text" placeholder="$">
+            </div>
+        </div>
+
+        <div id="ai-panel">
+            <h3 style="margin-bottom: 8px;">AI Assistant</h3>
+            <div id="ai-chat" style="height: calc(100% - 100px); overflow-y: auto;"></div>
+            <textarea id="ai-input" rows="3" placeholder="Ask AI..."></textarea>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
