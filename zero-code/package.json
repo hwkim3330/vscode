@@ -1,0 +1,34 @@
+{
+  "name": "zero-code-cli",
+  "version": "1.0.0",
+  "description": "Zero dependency AI code editor - Claude, OpenAI, Gemini",
+  "main": "src/main.js",
+  "bin": {
+    "zero-code": "./src/main.js"
+  },
+  "scripts": {
+    "start": "node src/main.js",
+    "build": "./scripts/build.sh",
+    "build:all": "./scripts/build-all.sh",
+    "release": "./scripts/release.sh",
+    "test": "node src/test.js"
+  },
+  "keywords": [
+    "ai",
+    "code-editor",
+    "claude",
+    "openai",
+    "gemini",
+    "zero-dependency",
+    "portable"
+  ],
+  "author": "KETI",
+  "license": "MIT",
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hwkim3330/vscode.git"
+  }
+}
