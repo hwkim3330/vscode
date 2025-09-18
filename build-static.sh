@@ -1,10 +1,10 @@
 #!/bin/bash
 
-# KETI Code - Static Binary Builder
+# Zero Code - Static Binary Builder
 # Creates a TRULY standalone executable that works on Ubuntu 18.04+
 # No Node.js, no dependencies, nothing required!
 
-echo "🚀 KETI Code Static Binary Builder"
+echo "⚡ Zero Code Static Binary Builder"
 echo "==================================="
 
 # Colors
