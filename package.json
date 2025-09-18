@@ -1,0 +1,28 @@
+{
+  "name": "gemini-code-assistant",
+  "version": "1.0.0",
+  "description": "Google Gemini AI Code Assistant",
+  "main": "gemini-app.js",
+  "scripts": {
+    "start": "node gemini-app.js chat",
+    "auth": "node google-gemini-auth.js",
+    "setup": "node google-gemini-auth.js setup",
+    "login": "node google-gemini-auth.js login",
+    "status": "node google-gemini-auth.js status",
+    "chat": "node gemini-app.js chat",
+    "test": "node test-gemini.js"
+  },
+  "keywords": [
+    "gemini",
+    "ai",
+    "google",
+    "code-assistant",
+    "oauth2"
+  ],
+  "author": "KETI",
+  "license": "MIT",
+  "dependencies": {},
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}

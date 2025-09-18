@@ -1,148 +1,134 @@
-# KETI Code - Zero Dependency AI Code Editor
+# Gemini Code Assistant
 
-A lightweight, standalone AI-powered code editor that works on **Ubuntu 18.04+** without ANY dependencies!
+Google Gemini AI를 사용한 코드 어시스턴트 애플리케이션
 
-## 🚀 Features
+## 기능
 
-- **Zero Dependencies**: No npm, no packages, nothing required
-- **AI Integration**: Built-in support for Claude, OpenAI, Codex
-- **Full Terminal**: Integrated terminal with sudo support
-- **Multi-Architecture**: Works on x86_64, ARM64, ARMv7
-- **Ubuntu 18.04+**: Compatible with older Linux systems
-- **Standalone Binary**: Single file executable
+- ✨ **Google OAuth2 인증** - 안전한 Google 계정 연동
+- 🔑 **Gemini API Key 지원** - 간단한 API 키 인증
+- 💬 **대화형 채팅** - Gemini AI와 실시간 대화
+- 🔧 **코드 완성** - 코드 자동 완성 및 개선
+- 📝 **코드 리뷰** - 코드 품질 분석 및 제안
+- 🚀 **다양한 모델 지원** - Gemini Pro, Gemini 1.5 Pro/Flash
 
-## 📦 Download
-
-Download the pre-built binary for your architecture:
-
-- [Linux x64](https://github.com/hwkim3330/keti-code/releases/download/v1.0/keti-code-linux-x64)
-- [Linux ARM64](https://github.com/hwkim3330/keti-code/releases/download/v1.0/keti-code-linux-arm64)
-- [Linux ARMv7](https://github.com/hwkim3330/keti-code/releases/download/v1.0/keti-code-linux-armv7)
-
-## 🔧 Installation
+## 설치
 
 ```bash
-# Download for your architecture
-curl -L https://github.com/hwkim3330/keti-code/releases/download/v1.0/keti-code-linux-x64 -o keti-code
-chmod +x keti-code
+# 저장소 클론
+git clone https://github.com/hwkim3330/vscode.git
+cd vscode
 
-# Run
-./keti-code
+# 의존성 설치 (현재는 내장 모듈만 사용)
+npm install
 ```
 
-## 🏗️ Build from Source
+## 설정
+
+### 방법 1: Gemini API Key 사용 (추천)
+
+1. [Google AI Studio](https://makersuite.google.com/app/apikey)에서 API 키 발급
+2. 환경 변수 설정:
+```bash
+export GEMINI_API_KEY="your-api-key-here"
+```
+
+### 방법 2: Google OAuth2 사용
+
+1. [Google Cloud Console](https://console.cloud.google.com/apis/credentials)에서 OAuth2 자격 증명 생성
+2. 환경 변수 설정:
+```bash
+export GOOGLE_CLIENT_ID="your-client-id"
+export GOOGLE_CLIENT_SECRET="your-client-secret"
+```
+
+## 사용법
+
+### 인증
 
 ```bash
-git clone https://github.com/hwkim3330/keti-code.git
-cd keti-code
+# 설정 가이드 보기
+npm run setup
 
-# Build portable version (recommended)
-./build-static.sh
+# 로그인
+npm run login
 
-# Run
-./dist/linux-x86_64/keti-code-portable
+# 인증 상태 확인
+npm run status
 ```
 
-## 🎯 Usage
-
-### Basic Usage
+### Gemini AI 사용
 
 ```bash
-# Start the editor
-./keti-code
+# 대화형 채팅 모드
+npm start
+# 또는
+npm run chat
 
-# With custom port
-KETI_PORT=8080 ./keti-code
+# 단일 질문
+node gemini-app.js ask "JavaScript에서 배열을 정렬하는 방법은?"
 
-# With AI API key
-KETI_API_KEY="your-api-key" ./keti-code
+# 코드 완성
+node gemini-app.js complete example.js
+
+# 코드 리뷰
+node gemini-app.js review mycode.js
+
+# 사용 가능한 모델 확인
+node gemini-app.js models
 ```
 
-### AI Configuration
+### 채팅 모드 명령어
+
+채팅 모드에서 사용 가능한 명령어:
+- `/model <name>` - 모델 변경 (gemini-pro, gemini-1.5-pro, gemini-1.5-flash)
+- `/code` - 코드 완성 모드
+- `/review` - 코드 리뷰 모드
+- `/clear` - 대화 초기화
+- `exit` - 종료
+
+## 테스트
 
 ```bash
-# Claude (Anthropic)
-export KETI_AI_PROVIDER=claude
-export KETI_API_KEY="sk-ant-..."
-
-# OpenAI
-export KETI_AI_PROVIDER=openai
-export KETI_API_KEY="sk-..."
+# API 연결 및 기능 테스트
+npm test
 ```
 
-## 🏛️ Architecture
+## 파일 구조
 
 ```
-keti-code
-├── Zero npm dependencies
-├── Pure Node.js built-in modules
-├── Embedded portable Node.js runtime
-└── Works without root privileges
+vscode/
+├── google-gemini-auth.js    # Google OAuth2/API Key 인증
+├── gemini-app.js            # Gemini AI 메인 애플리케이션
+├── test-gemini.js           # 테스트 스위트
+├── package.json             # 프로젝트 설정
+└── README.md               # 이 파일
 ```
 
-## 🔥 Key Features
+## 지원 모델
 
-### 1. Terminal Integration
-- Full terminal access in browser
-- Execute any command
-- Sudo support
-- Real-time output
+- **gemini-pro**: 텍스트 생성에 최적화
+- **gemini-pro-vision**: 이미지 + 텍스트 처리
+- **gemini-1.5-pro**: 최신 고성능 모델
+- **gemini-1.5-flash**: 빠른 응답 속도 (기본값)
 
-### 2. AI Assistant
-- Code completion
-- Code explanation
-- Bug fixing
-- Refactoring suggestions
+## 보안 주의사항
 
-### 3. File Management
-- Browse files
-- Edit multiple files
-- Syntax highlighting
-- Auto-save
+- API 키를 코드에 직접 포함하지 마세요
+- 환경 변수나 설정 파일을 사용하세요
+- `.gitignore`에 인증 파일 추가 필수
 
-## 📋 System Requirements
+## 문제 해결
 
-- **OS**: Ubuntu 18.04+ / Debian 10+ / CentOS 7+
-- **Architecture**: x86_64, ARM64, ARMv7
-- **RAM**: 512MB minimum
-- **Disk**: 50MB for application
+### API 키가 작동하지 않는 경우
+1. API 키가 올바른지 확인
+2. [Google AI Studio](https://makersuite.google.com/app/apikey)에서 API 활성화 확인
+3. 할당량 제한 확인
 
-## 🤝 Comparison
+### OAuth2 인증 실패
+1. Client ID와 Secret이 올바른지 확인
+2. Redirect URI가 `http://localhost:1456/callback`로 설정되었는지 확인
+3. 필요한 API가 활성화되었는지 확인
 
-| Feature | KETI Code | VSCode | Cursor | Claude Code |
-|---------|-----------|---------|---------|------------|
-| Zero Dependencies | ✅ | ❌ | ❌ | ❌ |
-| Ubuntu 18.04 Support | ✅ | ❌ | ❌ | ❌ |
-| Standalone Binary | ✅ | ❌ | ❌ | ❌ |
-| Terminal Integration | ✅ | ✅ | ✅ | ✅ |
-| AI Integration | ✅ | ❌ | ✅ | ✅ |
-| File Size | 36KB | 350MB | 400MB | 300MB |
+## 라이선스
 
-## 🛠️ Development
-
-```bash
-# Run in development mode
-node keti-code.js
-
-# Build all architectures
-./build-static.sh --all
-
-# Create portable version only
-./build-static.sh --portable
-```
-
-## 📄 License
-
-MIT License - Free for personal and commercial use
-
-## 🙏 Credits
-
-Inspired by:
-- Microsoft VSCode
-- Cursor Editor
-- Anthropic Claude Code
-- OpenAI Codex
-
----
-
-**Made with ❤️ for developers who need a lightweight AI code editor**
+MIT
